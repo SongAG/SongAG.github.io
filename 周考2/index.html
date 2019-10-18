@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        
+        .wasd-leave,
+        .wasd-leave-to {
+            opacity: 1;
+            left: 1px !important;
+        }
+        
+        .wasd-leave-active,
+        .wasd-enter-active {
+            transition: 1s;
+        }
+        
+        .wasd-leave-to {
+            opacity: 0;
+        }
+        
+        .wasd-enter {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" v-cloak='' style="position: relative;">
+        <div class="header">
+            <div class="nav" style="width: 100%;min-height: 40px;padding: 20px 5%;position: absolute;top: 0;z-index: 10;box-sizing: border-box;">
+                <div style="width: 200px;height: 40px;display: inline-block;margin-right: 10%;">
+                    <img src="https://ccdn.goodq.top/caches/0aa02806352a2c565f61961c812e84a8/aHR0cHM6Ly81N2UyNDNhYWE3NzlhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMTAvMmE4YWZmM2RkZmJkYWU5YmFjMjhmOTczNGUzOTE1NWMucG5n.png" alt="" style="width: 100%;height: 100%;">
+                </div>
+                <div style="display: inline-block;">
+                    <ul>
+                        <li v-for='i in arr' style="float: left;padding: 10px 20px;">
+                            <a :href="i.path" style="color: #fff;">{{i.title}}</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="content" style="min-height: 600px;width: 100%;background: lemonchiffon;">
+            <router-view></router-view>
+        </div>
+    </div>
+    <!-- 首页 -->
+    <template id="shouye">
+        <div>
+            <div style="width: 100%;min-height: 800px;position: absolute;top: 0;">
+                <div style="background-image: url(http://57e243aaa779a.t73.qifeiye.com/qfy-content/uploads/2016/10/f549634402d680ae8cccd5a6039000b5.jpg);width: 100%;min-height: 800px;background-size: 100% 100%;">
+
+                </div>
+                <div style="width: 100%;height: 100%;background: rgba(0, 0, 0, 0.5);position: absolute;top: 0;">
+                    <div style="position: absolute;top:30%;width: 100%;height: 50px;line-height: 200px;text-align: center;font-size: 30px;color: #fff;" name="wasd">
+                        <transition v-for="(i,$index) in data_arr">
+                         <p v-if="type==$index" style="position:absolute;width: 100%;text-align: center;">{{i}}</p>
+                        </transition>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </template>
+    <!-- 产品发布 -->
+    <template id="chanpin">
+        <div>
+            <div style="width: 100%;min-height: 400px;position: absolute;top: 0;">
+                <div style="background-image:url(https://ccdn.goodq.top/caches/0aa02806352a2c565f61961c812e84a8/aHR0cHM6Ly81N2UyNDNhYWE3NzlhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMTAvMDViZjRkNzAxMDU2NTNkNjI2ODQ2NmY4ZGY4NzFmM2YuanBn.jpg);width: 100%;min-height: 600px;background-size: 100% 100%;"></div>
+                <div style="width: 100%;min-height: 600px;background: rgba(0, 0, 0, 0.5);position: absolute;top: 0;"></div>
+                <div>
+                    <div style="margin-left: 20%;width: 60%;margin: 0 auto;text-align: center;margin-top: 50px;">
+                        <h1 style="padding: 5px 0;">产品发布</h1>
+                        <span style="width: 50px;height: 2px;background: #54d7e0;display:inline-block;"></span>
+                        <p style="margin-top: 10px;color: #696969;padding: 0 0 20px 0;">応捠捡换攴朰朸妀夲夳夵壱，売圢圤圥圦圧圪咐咑厺厼厽帄帇</p>
+                        <img src="https://ccdn.goodq.top/caches/0aa02806352a2c565f61961c812e84a8/aHR0cHM6Ly81N2UyNDNhYWE3NzlhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMDkvNGQxZGJmMGU0MTg5YWUxYWU1ZjNmZDkyZjc3OWRhMGItNzY2eDUwMC5wbmc_p_p100_p_3D.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- 咨询发布 -->
+    <template id="zixun">
+        <div>
+                <div style="width: 100%;min-height: 400px;position: absolute;top: 0;">
+                        <div style="background-image:url(https://ccdn.goodq.top/caches/0aa02806352a2c565f61961c812e84a8/aHR0cHM6Ly81N2UyNDNhYWE3NzlhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMTAvOTk4ZGE5MWY4MGZiNDg3NjU4MjI2MDQ1NzBhY2RmNDYuanBn.jpg);width: 100%;min-height: 600px;background-size: 100% 100%;"></div>
+                        <div style="width: 100%;min-height: 600px;background: rgba(0, 0, 0, 0.5);position: absolute;top: 0;"></div>
+                        <div style="position: absolute;top: 400px;background: #fff;width: 100%;min-height: 350px;">
+                            <div style="margin-left: 20%;width: 60%;min-height:200px;margin: 0 auto;margin-top: 50px;background: #fff;">
+                                <div style="float: left;width: 20%;height: 100%;padding:20px 50px 0 0;text-align: center;">
+                                    <ul>
+                                        <li style="border-bottom: 1px solid #ccc;line-height: 40px;width: 100%;" v-for="i in arr" @click='btn(i)'>{{i}}</li>
+                                    </ul>
+                                </div>
+                                <div style="float: left;width: 60%;height: 100%;">
+                                    <p style="width: 100%;height: 40px;border-bottom: 1px solid #ccc;font-size: 24px;padding: 10px 0;">咨询发布</p>
+                                    <ul v-if="type=='全部发布'">
+                                        <li v-for="i in list_arr" >
+                                                <div style="min-height: 144px;">
+                                                        <div style="float: left;padding: 10px 10px;">
+                                                            <img :src="i.img" alt="">
+                                                        </div>
+                                                        <div style="padding: 10px 10px 0 10px;">
+                                                        <p style="padding: 5px 0;">{{i.title}}</p>
+                                                        <p style="line-height: 20px;font-size: 14px;">{{i.content}}</p>
+                                                    </div>
+                                                    </div>
+                                        </li>
+                                    </ul>
+                                    <ul v-else="" style="min-height: 200px;">
+                                        <li v-for='i in list_arr' v-if='type==i.uid'>
+                                            <div style="min-height: 144px;">
+                                                <div style="float: left;padding: 10px 10px;">
+                                                    <img :src="i.img" alt="">
+                                                </div>
+                                                <div style="padding: 10px 10px 0 10px;">
+                                                <p style="padding: 5px 0;">{{i.title}}</p>
+                                                <p style="line-height: 20px;font-size: 14px;">{{i.content}}</p>
+                                            </div>
+                                            </div>
+                                            
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </template>
+    <!-- 全部 -->
+    <template id="quanbu">
+        <div>
+            
+        </div>
+    </template>
+</body>
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+<script>
+    const router = new VueRouter({
+        routes: [{
+            path: '/',
+            component: {
+                template: "#shouye",
+                mounted() {
+                    setInterval(() => {
+                        this.btn()
+                    }, 1000)
+                },
+                methods: {
+                    btn() {
+                        if (this.s_type) {
+                            this.type++
+                                if (this.type >= this.data_arr.length) {
+                                    this.type = 0
+                                }
+                            this.s_type = false
+                            setTimeout(() => {
+                                this.s_type = true
+                            }, 1000)
+                        }
+                    }
+                },
+                data() {
+                    return {
+                        type: 0,
+                        s_type: true,
+                        data_arr: [
+                            "我们无法做到完美，  但追求完美能让人卓越",
+                            "我们无法做到完美",
+                            "但追求完美能让人卓越"
+                        ],
+                    }
+
+                }
+
+            }
+        }, {
+            path: '/no2',
+            component: {
+                template: "#chanpin",
+
+            }
+        }, {
+            path: "/no3",
+            component: {
+                template: "#zixun",
+                methods: {
+                    btn(i) {
+                        this.type = i
+                    }
+                },
+                data() {
+                    return {
+                        type: '全部发布',
+                        arr: [
+                            "全部发布",
+                            "公司新闻",
+                            "行业资讯"
+                        ],
+                        list_arr: [{
+                            uid: "公司新闻",
+                            title: "打听打听这一块",
+                            img: 'https://ccdn.goodq.top/caches/0aa02806352a2c565f61961c812e84a8/aHR0cHM6Ly81N2UyNDNhYWE3NzlhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMTAvMDViZjRkNzAxMDU2NTNkNjI2ODQ2NmY4ZGY4NzFmM2YtMTgweDEyMC5qcGc_p_p100_p_3D.jpg',
+                            content: '国际化房间号附近有反应打个红地毯擐甲挥戈复印件好麻烦给建议恢复后更好地恢复与推广股东会特大号工程投影仪复印件光天化日感受到合肥一看见考核结果合法'
+                        }, {
+                            uid: "行业资讯",
+                            title: "打听打听这一块",
+                            img: 'https://ccdn.goodq.top/caches/0aa02806352a2c565f61961c812e84a8/aHR0cHM6Ly81N2UyNDNhYWE3NzlhLnQ3My5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMTAvMDViZjRkNzAxMDU2NTNkNjI2ODQ2NmY4ZGY4NzFmM2YtMTgweDEyMC5qcGc_p_p100_p_3D.jpg',
+                            content: '国际化房间号附近有反应打个红地毯擐甲挥戈复印件好麻烦给建议恢复后更好地恢复与推广股东会特大号工程投影仪复印件光天化日感受到合肥一看见考核结果合法'
+                        }, ]
+                    }
+
+                }
+            }
+        }]
+    })
+    new Vue({
+        el: "#box",
+
+        data: {
+            arr: [{
+                title: '首页',
+                path: '#/'
+            }, {
+                title: '产品发布',
+                path: '#/no2'
+            }, {
+                title: '咨询发布',
+                path: '#/no3'
+            }],
+        },
+        router
+    })
+</script>
+
+</html>
